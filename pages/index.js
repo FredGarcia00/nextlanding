@@ -11,7 +11,7 @@ export default function Home({posts}) {
   return (
     <Layout>
           <Head>
-            <title>Fred's Blog</title>
+            <title>Freds Blog</title>
           </Head>
         {/* Banner */}
         <section id="banner" className="major">
@@ -36,7 +36,7 @@ export default function Home({posts}) {
             {/* loop over post */}
 
             {posts.map((post) => (
-                    <article>
+                    <article key={post.title}>
                     <span className="image">
                       <img src={`/images/${post.featured_image}`} alt="" />
                     </span>
@@ -67,7 +67,7 @@ export default function Home({posts}) {
 
 export const getStaticProps = async () => {
   const sortPosts = () => {
-    const allPosts = fs.readdirSync('posts').map((filename) => {
+    const allPosts = fs.readdirSync("posts").map((filename) => {
       const file = fs.readFileSync(path.join("posts", filename)).toString();
       // console.log(file);
       const postData = matter(file);
@@ -85,7 +85,7 @@ export const getStaticProps = async () => {
     
   }
   // console.log(fs.readdirSync('posts'));
- console.log(sortPosts());
+//  console.log(sortPosts());
   return {
     props: {
       posts: sortPosts(),

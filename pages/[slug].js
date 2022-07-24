@@ -7,11 +7,12 @@ import {marked} from 'marked'
 
 
 
+
 export default function PostPage({postData, content}) {
   return (
     <Layout>
           <Head>
-        <title>Fred's Blog</title>
+        <title>Freds Blog</title>
       </Head>
        {/* Main */}
       <div id="main" className="alt">
@@ -32,13 +33,13 @@ export default function PostPage({postData, content}) {
 
 export const getStaticPaths = async() =>  {
   const files = fs.readdirSync('posts');
-  console.log("Files: ", files);
+  // console.log("Files: ", files);
   const paths = files.map(filename => ({
     params: {
       slug: filename.replace('.md', '')
     }
   }));
-  console.log('paths: ', paths);
+  // console.log('paths: ', paths);
   return {
     paths: paths,
     fallback: false
@@ -48,7 +49,7 @@ export const getStaticProps = async ({params: {slug}}) => {
   const post = fs.readFileSync(path.join('posts', `${slug}.md`)).toString();
   const postData = matter(post); // gets post data
   const content = marked(postData.content); //convets into html
-  console.log(postData.data)
+  // console.log(postData.data)
   return {
     props: {
       slug,
